@@ -8,7 +8,8 @@ User = get_user_model()
 
 class UserAuthForm(AuthenticationForm):
     username = forms.EmailField(label='E-mail',
-                          widget=forms.TextInput(attrs={'autofocus': True}))
+                                widget=forms.TextInput(
+                                    attrs={'autofocus': True}))
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -16,7 +17,7 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('email', 'first_name',  'language')
+        fields = ('email', 'first_name', 'language')
 
 
 class UserForm(forms.ModelForm):
