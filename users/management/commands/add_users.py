@@ -11,6 +11,8 @@ User = get_user_model()
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        if User.objects.all().count() != 0:
+            return print('All users have already been created before')
         with open(
             os.path.join(settings.BASE_DIR, 'test_data/add_users.csv'),
             encoding='utf-8',

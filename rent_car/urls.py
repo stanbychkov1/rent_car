@@ -4,6 +4,9 @@ from django.urls import path, include
 
 from rent_car import settings
 
+handler404 = 'cars.errors.page_not_found'
+handler500 = 'cars.errors.server_error'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls')),
