@@ -14,7 +14,7 @@ class UserCarsApiView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return self.request.user.car.all()
+        return self.request.user.car.all().order_by('id')
 
 
 class AllUsersApiView(mixins.UpdateModelMixin, generics.ListAPIView):
@@ -22,7 +22,7 @@ class AllUsersApiView(mixins.UpdateModelMixin, generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return get_user_model().objects.all()
+        return get_user_model().objects.all().order_by('id')
 
 
 class MeApiView(generics.RetrieveUpdateAPIView):
