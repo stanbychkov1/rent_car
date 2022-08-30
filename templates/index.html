@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+    <div>
+    <h1>Введите даты аренды</h1>
+    <form class="card-body" method="get" action="/rent/">
+        <label for="id_start_date">Дата начала</label>
+        <input class="form-control" id="id_start_date" type="date" name="start_date" required/>
+        <label for="id_end_date">Дата конца</label>
+        <input class="form-control" id="id_end_date" type="date" name="end_date" required/>
+        <div class="card-footer">
+        <button class="btn btn-primary" type="submit">Найти автомобиль</button>
+        </div>
+    </form>
+    </div>
+{% endblock content %}
+{% block scripts %}
+<script src="{% static 'js/datepicker.js' %}"></script>
+{% endblock scripts %}

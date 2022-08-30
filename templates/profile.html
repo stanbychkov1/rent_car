@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<div>
+    {% if request.path == '/auth/profile/' %}
+    <form class="card-body" method="get" action="/auth/profile/update/">
+    {% elif request.path == '/auth/profile/update/' %}
+    <form class="card-body" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% endif %}
+        {% for field in form %}
+            <div class="form-control">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+            <div class="card-footer">
+         {% if request.path == '/auth/profile/' %}
+        <button class="btn btn-primary" type="submit">Изменить информацию</button>
+         {% elif request.path == '/auth/profile/update/' %}
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+         {% endif %}
+    </div>
+</div>
+{% endblock %}

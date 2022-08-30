@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+        <div>
+        <h1>Свободные автомобили на эти даты</h1>
+        {% for object in object_list %}
+    <form class="card-body" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_car">{{ object }}</label>
+        <input class="form-control" id="id_car" type="hidden" name="car" value="{{ object.id }}"/>
+        {% if form.errors.car %}
+                <ul>{{ form.errors.car }}</ul>
+        {% endif %}
+        <input class="form-control" id="id_start_date" type="hidden" name="start_date" value="{{ request.GET.start_date }}"/>
+        {% if form.errors.start_date %}
+                <ul>{{ form.errors.start_date }}</ul>
+        {% endif %}
+        <input class="form-control" id="id_end_date" type="hidden" name="end_date" value="{{ request.GET.end_date }}"/>
+        {% if form.errors.end_date %}
+                <ul>{{ form.errors.end_date }}</ul>
+        {% endif %}
+        <div class="card-footer">
+        <button class="btn btn-primary" type="submit">Арендовать</button>
+        </div>
+    </form>
+            {% empty %}
+            <h1>К сожалению на эти даты нет свободных автомобилей</h1>
+            {% endfor %}
+    </div>
+{% endblock content %}
