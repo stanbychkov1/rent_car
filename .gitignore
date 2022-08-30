@@ -139,7 +139,6 @@ dmypy.json
 /static/debug_toolbar
 /staticfiles/
 
-*.csv
 *.rar
 
 .DS_Store
