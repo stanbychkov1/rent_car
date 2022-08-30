@@ -16,11 +16,10 @@ class Command(BaseCommand):
             reader = csv.reader(csvfile)
             for row in reader:
                 car, created = models.Car.objects.get_or_create(
-                    id=row[0],
-                    title=row[1],
-                    title_en=row[2],
-                    prod_year=row[3],
-                    owner_id=row[4])
+                    title=row[0],
+                    title_en=row[1],
+                    prod_year=row[2],
+                    owner_id=row[3])
                 if created:
                     print(f'Car {car.title_en} created')
                 else:

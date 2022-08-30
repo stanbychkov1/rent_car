@@ -17,16 +17,13 @@ class Command(BaseCommand):
         ) as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
-                user, created = User.objects.get_or_create(
-                    id=row[0],
-                    username=row[1],
-                    email=row[2],
-                    language=row[3],
-                    first_name=row[4],
-                    last_name=row[5],
-                    password=row[6])
-                if created:
-                    print(f'User {user.email} created')
-                else:
-                    print(f'User {user.email} already existed')
-
+                user = User(
+                    username=row[0],
+                    email=row[1],
+                    language=row[2],
+                    first_name=row[3],
+                    last_name=row[4],
+                )
+                user.set_password(row[5])
+                user.save()
+                print(f'User {user.email} created')

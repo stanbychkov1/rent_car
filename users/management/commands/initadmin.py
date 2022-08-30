@@ -12,10 +12,12 @@ User = get_user_model()
 class Command(BaseCommand):
     def handle(self, *args, **options):
         email = os.getenv('DJANGO_EMAIL_ADMIN')
-        if User.objects.filter(email=email).count() == 0:
+        if not User.objects.filter(email=email).exists():
+            id = User.objects.latest('id').id + 1
             username = os.getenv('DJANGO_USERNAME_ADMIN')
             password = os.getenv('DJANGO_PASSWORD_ADMIN')
             User.objects.create_superuser(
+                id=id,
                 username=username,
                 password=password,
                 email=email,

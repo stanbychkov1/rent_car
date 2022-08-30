@@ -16,11 +16,10 @@ class Command(BaseCommand):
             reader = csv.reader(csvfile)
             for row in reader:
                 rental_period, created = models.RentalPeriod.objects.get_or_create(
-                    id=row[0],
-                    car_id=row[1],
-                    driver_id=row[2],
-                    start_date=row[3],
-                    end_date=row[4])
+                    car_id=row[0],
+                    driver_id=row[1],
+                    start_date=row[2],
+                    end_date=row[3])
                 if created:
                     print(f'Rent {rental_period.id} created')
                 else:
