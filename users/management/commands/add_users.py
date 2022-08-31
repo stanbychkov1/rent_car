@@ -19,12 +19,13 @@ class Command(BaseCommand):
         ) as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
-                user, created = User.objects.create_user(
+                user = User.objects.create(
                     username=row[0],
                     email=row[1],
                     language=row[2],
                     first_name=row[3],
                     last_name=row[4],
-                    password=row[5]
                 )
+                user.set_password(row[5])
+                user.save()
                 print(f'User {user.email} created')
